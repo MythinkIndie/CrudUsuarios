@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /var/www/html
 
 # Copia solo los archivos de Composer primero (para aprovechar cache)
-COPY composer.json ./
+COPY crud/composer.json ./
 
 # Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
