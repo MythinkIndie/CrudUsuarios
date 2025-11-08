@@ -23,6 +23,8 @@ RUN php bin/console cache:clear --env=prod
 
 RUN php bin/console cache:warmup --env=prod
 
+RUN php bin/console debug:router --env=prod
+
 # Luego copia el resto del código
 COPY crud/ .
 
