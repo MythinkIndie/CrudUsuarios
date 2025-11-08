@@ -3,7 +3,7 @@ FROM php:8.3-apache
 
 # Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    git unzip libicu-dev libpq-dev zlib1g-dev libxml2-dev libpng-dev libonig-dev \
+    git unzip libicu-dev libpq-dev libzip-dev libxml2-dev libpng-dev libonig-dev \
     && docker-php-ext-install intl pdo pdo_mysql opcache zip gd mbstring xml
 
 # Habilitar mod_rewrite para Symfony
