@@ -16,7 +16,6 @@ COPY crud/composer.json crud/composer.lock ./
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
