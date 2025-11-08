@@ -22,6 +22,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # Luego copia el resto del código
 COPY crud/ .
 
+RUN php bin/console cache:clear --env=prod
+
 # Configura Apache para servir desde 'public'
 RUN echo "<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/public\n\
