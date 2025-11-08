@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar usuario{% endblock %}
+
+{% block body %}
+<main class="flex flex-col items-center justify-center mx-auto px-4 py-6 text-center
+    border border-gray-100 bg-white
+    rounded-lg max-w-2xl">
+    <h1 class="font-bold text-3xl py-3 mb-6">Editar usuario</h1>
+
+    {{ form_start(form, {'attr': {'class': 'w-full space-y-4 text-left'}}) }}
+        <div>
+            {{ form_label(form.name, 'Nombre', {'label_attr': {'class': 'font-semibold'}}) }}
+            {{ form_widget(form.name, {'attr': {'class': 'w-full border border-gray-300 rounded-md px-3 py-6 py-2'}}) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div>
+            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'font-semibold'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'w-full border border-gray-300 rounded-md px-3 py-2'}}) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <div>
+            {{ form_label(form.phone, 'Teléfono', {'label_attr': {'class': 'font-semibold'}}) }}
+            {{ form_widget(form.phone, {'attr': {'class': 'w-full border border-gray-300 rounded-md px-3 py-2'}}) }}
+            {{ form_errors(form.phone) }}
+        </div>
+        <div>
+            {{ form_label(form.type, 'Tipo', {'label_attr': {'class': 'font-semibold'}}) }}
+            {{ form_widget(form.type, {'attr': {'class': 'w-full border border-gray-300 rounded-md px-3 py-2'}}) }}
+            {{ form_errors(form.type) }}
+        </div>
+        <div>
+            {{ form_label(form.isActive, '¿Está activo?', {'label_attr': {'class': 'font-semibold'}}) }}
+            {{ form_widget(form.isActive, {'attr': {'class': 'ml-2'}}) }}
+        </div>
+        <div class="flex justify-between items-center mt-6">
+            <a href="{{ path('user_index') }}" class="rounded-md bg-gray-400 hover:bg-gray-600 px-5 py-2 font-medium text-white">Volver</a>
+            <button class="rounded-md bg-yellow-500 hover:bg-yellow-700 px-5 py-2 font-medium text-white">Actualizar</button>
+        </div>
+    {{ form_end(form, {'render_rest': false}) }}
+
+    <form method="post" action="{{ path('user_delete', {id: user.id}) }}" class="mt-4" onsubmit="return confirm('¿Eliminar este usuario?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+        <button class="rounded-md bg-red-600 hover:bg-red-800 px-5 py-2 font-medium text-white">Eliminar</button>
+    </form>
+</main>
+{% endblock %}

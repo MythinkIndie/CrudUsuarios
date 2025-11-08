@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle de usuario{% endblock %}
+
+{% block body %}
+<main class="flex flex-col items-center justify-center mx-auto px-4 py-6 text-center
+    border border-gray-100 bg-white
+    rounded-lg max-w-2xl">
+    <h1 class="font-bold text-3xl py-3 mb-6">Detalle de usuario</h1>
+
+    <div class="w-full text-left space-y-4">
+        <div>
+            <span class="font-semibold text-gray-600">ID:</span>
+            <p class="text-gray-800">{{ user.id }}</p>
+        </div>
+
+        <div>
+            <span class="font-semibold text-gray-600">Nombre:</span>
+            <p class="text-gray-800">{{ user.name }}</p>
+        </div>
+
+        <div>
+            <span class="font-semibold text-gray-600">Email:</span>
+            <p class="text-gray-800">{{ user.email }}</p>
+        </div>
+
+        <div>
+            <span class="font-semibold text-gray-600">Teléfono:</span>
+            <p class="text-gray-800">{{ user.phone }}</p>
+        </div>
+
+        <div>
+            <span class="font-semibold text-gray-600">Tipo:</span>
+            <p class="text-gray-800">{{ user.type }}</p>
+        </div>
+
+        <div>
+            <span class="font-semibold text-gray-600">Estado:</span>
+            {% if user.isActive %}
+                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    Activo
+                </span>
+            {% else %}
+                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                    Inactivo
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="flex justify-between items-center w-full mt-8">
+        <a href="{{ path('user_index') }}" class="rounded-md bg-gray-400 hover:bg-gray-600 px-5 py-2 font-medium text-white">Volver</a>
+        <div class="flex gap-3">
+            <a href="{{ path('user_edit', {id: user.id}) }}" class="rounded-md bg-yellow-500 hover:bg-yellow-700 px-5 py-2 font-medium text-white">Editar</a>
+
+            <form method="post" action="{{ path('user_delete', {id: user.id}) }}" onsubmit="return confirm('¿Eliminar este usuario?');" class="inline">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                <button type="submit" class="rounded-md bg-red-600 hover:bg-red-800 px-5 py-2 font-medium text-white">Eliminar</button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
