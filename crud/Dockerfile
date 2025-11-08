@@ -11,7 +11,7 @@ RUN a2enmod rewrite
 # Establece el directorio de trabajo
 WORKDIR /var/www/html
 
-COPY crud/composer.json crud/composer.lock ./
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY crud/ .
 
