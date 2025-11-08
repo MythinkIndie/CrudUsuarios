@@ -19,10 +19,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+RUN php bin/console cache:clear --env=prod
+
 # Luego copia el resto del código
 COPY crud/ .
-
-RUN php bin/console cache:clear --env=prod
 
 # Configura Apache para servir desde 'public'
 RUN echo "<VirtualHost *:80>\n\
