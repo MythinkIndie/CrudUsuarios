@@ -20,6 +20,11 @@ COPY crud/ .
 # Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+RUN php bin/console cache:clear --env=prod
+RUN php bin/console cache:warmup --env=prod
+
+RUN rm -rf vendor/
+
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
