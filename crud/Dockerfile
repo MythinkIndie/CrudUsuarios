@@ -24,7 +24,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-RUN php bin/console cache:clear --env=prod
+RUN php bin/console cache:clear --env=prod --no-warmup
 RUN php bin/console cache:warmup --env=prod
 
 RUN php bin/console debug:router --env=prod
