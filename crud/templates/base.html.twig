@@ -8,10 +8,6 @@
         {% endblock %}
 
         <script src="https://cdn.tailwindcss.com"></script>
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
     </head>
     <body class="w-screen h-screen px-16 lg:px-32 pt-24 bg-gray-100">
         {% block body %}{% endblock %}
