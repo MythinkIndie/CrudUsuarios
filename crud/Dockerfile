@@ -25,7 +25,7 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interactio
 RUN php bin/console cache:clear --env=prod
 RUN php bin/console cache:warmup --env=prod
 
-RUN php bin/console importmap:install
+RUN php bin/console debug:router --env=prod
 
 # Dar permisos adecuados
 RUN chown -R www-data:www-data var
