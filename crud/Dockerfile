@@ -19,13 +19,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+COPY crud/ .
+
 RUN php bin/console cache:clear --env=prod
 RUN php bin/console cache:warmup --env=prod
 
 RUN chown -R www-data:www-data var
 RUN chmod -R 775 var
-
-COPY crud/ .
 
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
