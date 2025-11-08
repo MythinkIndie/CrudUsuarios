@@ -8,21 +8,21 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod rewrite
 
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
 # Establece el directorio de trabajo
 WORKDIR /var/www/html
 
 # Copia solo los archivos de Composer primero (para aprovechar cache)
 COPY crud/composer.json crud/composer.lock ./
 
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+COPY crud/ .
+
 RUN php bin/console cache:clear --env=prod
 RUN php bin/console cache:warmup --env=prod
-
-COPY crud/ .
 
 RUN chown -R www-data:www-data var
 RUN chmod -R 775 var
