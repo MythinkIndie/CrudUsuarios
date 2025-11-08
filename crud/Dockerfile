@@ -19,10 +19,10 @@ COPY crud/composer.json crud/composer.lock ./
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-COPY crud/ .
-
 RUN php bin/console cache:clear --env=prod
 RUN php bin/console cache:warmup --env=prod
+
+COPY crud/ .
 
 RUN chown -R www-data:www-data var
 RUN chmod -R 775 var
