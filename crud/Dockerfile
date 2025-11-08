@@ -20,7 +20,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer install --no-dev --optimize-autoloader
 
 # Luego copia el resto del código
-COPY . .
+COPY crud/ .
 
 # Configura Apache para servir desde 'public'
 RUN echo "<VirtualHost *:80>\n\
