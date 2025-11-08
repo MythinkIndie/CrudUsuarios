@@ -14,8 +14,6 @@ WORKDIR /var/www/html
 # Copia solo los archivos de Composer primero (para aprovechar cache)
 COPY crud/composer.json crud/composer.lock ./
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
