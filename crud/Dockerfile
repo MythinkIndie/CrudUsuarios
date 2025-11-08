@@ -3,8 +3,8 @@ FROM php:8.2-apache
 
 # Instala dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    git unzip libicu-dev libpq-dev libzip-dev zip \
-    && docker-php-ext-install intl pdo pdo_mysql opcache zip \
+    git unzip libicu-dev libpq-dev libzip-dev zip libxml2-dev libpng-dev libonig-dev \
+    && docker-php-ext-install intl pdo pdo_mysql opcache zip gd mbstring xml \
     && a2enmod rewrite
 
 # Establece el directorio de trabajo
@@ -17,7 +17,7 @@ COPY crud/composer.json ./
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Instala dependencias PHP
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Luego copia el resto del código
 COPY crud/ .
