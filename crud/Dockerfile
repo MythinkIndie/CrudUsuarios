@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /var/www/html
 
 # Copia solo los archivos de Composer primero (para aprovechar cache)
-COPY crud/composer.json composer.lock ./
+COPY composer.json composer.lock ./
 
 # Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -20,7 +20,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer install --no-dev --optimize-autoloader
 
 # Luego copia el resto del código
-COPY crud/. .
+COPY . .
 
 # Configura Apache para servir desde 'public'
 RUN echo "<VirtualHost *:80>\n\
