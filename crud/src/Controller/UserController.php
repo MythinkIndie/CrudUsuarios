@@ -13,7 +13,7 @@
     #[Route("/usuarios")]
     class UserController extends AbstractController {
 
-        #[Route("/", name: "user_index", methods: ["GET"])]
+        #[Route("", name: "user_index", methods: ["GET"])]
         public function index(UserRepository $repo, Request $request): Response {
 
             $term = $request->query->get("q", "");
