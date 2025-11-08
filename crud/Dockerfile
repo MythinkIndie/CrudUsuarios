@@ -11,15 +11,20 @@ RUN a2enmod rewrite
 # Establece el directorio de trabajo
 WORKDIR /var/www/html
 
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY crud/composer.json ./
 
-COPY crud/ .
+# Instala Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Instala dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 RUN php bin/console cache:clear --env=prod
 RUN php bin/console cache:warmup --env=prod
+
+COPY crud/ .
 
 RUN chown -R www-data:www-data var
 RUN chmod -R 775 var
