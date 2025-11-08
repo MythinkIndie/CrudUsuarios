@@ -48,9 +48,9 @@
         </div>
     </div>
 
-    <div class="flex justify-between items-center w-full mt-8">
-        <a href="{{ path('user_index') }}" class="rounded-md bg-gray-400 hover:bg-gray-600 px-5 py-2 font-medium text-white">Volver</a>
-        <div class="flex gap-3">
+    <div class="flex flex-col sm:flex-row justify-between items-center w-full mt-8">
+        <a href="{{ path('user_index') }}" class="rounded-md bg-gray-400 hover:bg-gray-600 px-5 py-2 mb-3 sm:mb-0 font-medium text-white">Volver</a>
+        <div class="flex flex-col sm:flex-row gap-3">
             <a href="{{ path('user_edit', {id: user.id}) }}" class="rounded-md bg-yellow-500 hover:bg-yellow-700 px-5 py-2 font-medium text-white">Editar</a>
 
             <form method="post" action="{{ path('user_delete', {id: user.id}) }}" onsubmit="return confirm('¿Eliminar este usuario?');" class="inline">

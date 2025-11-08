@@ -13,15 +13,6 @@
 
         }
 
-        public function findByTerms(string $term) {
-
-            $qb = $this->createQueryBuilder("user");
-            $qb->where("user.isActive = true OR user.isActive = 1")->orderBy("user.id", "ASC");
-
-            return $qb->getQuery()->getResult();
-
-        }
-
         public function searchUsers(string $term): array {
             return $this->createQueryBuilder('u')
                 ->where('u.name LIKE :term OR u.email LIKE :term OR u.phone LIKE :term')
