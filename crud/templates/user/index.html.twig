@@ -22,6 +22,8 @@
                     <th>Tel.</th>
                     <th>Tipo</th>
                     <th>Esta activo</th>
+                    <th>Creado</th>
+                    <th>Modificado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -44,6 +46,8 @@
                             </span>
                         {% endif %}
                     </td>
+                    <td class="py-3 px-4 text-sm text-gray-700">{{ user.createdAt|date('d/m/Y H:i') }}</td>
+                    <td class="py-3 px-4 text-sm text-gray-700">{{ user.modifiedAt ? user.modifiedAt|date('d/m/Y H:i') : '—' }}</td>
                     <td class="py-3 px-2 text-sm text-gray-700 flex flex-col xl:flex-row justify-around items-center">
                         <a href="{{ path('user_show', {id: user.id}) }}" class="rounded-md bg-blue-500 hover:bg-blue-700 px-3 py-1 xl:px-5 xl:py-2 font-medium text-white">Ver</a>
                         <a href="{{ path('user_edit', {id: user.id}) }}" class="rounded-md bg-yellow-500 hover:bg-yellow-700 px-3 py-1 xl:px-5 xl:py-2 font-medium text-white">Editar</a>
@@ -76,6 +80,8 @@
                     <span class="text-red-600 font-semibold">No</span>
                 {% endif %}
             </p>
+            <p><strong>Creado:</strong> {{ user.createdAt|date('d/m/Y H:i') }}</p>
+            <p><strong>Editado:</strong> {{ user.modifiedAt ? user.modifiedAt|date('d/m/Y H:i') : '—' }}</p>
             <div class="mt-2 flex flex-wrap gap-2">
                 <a href="{{ path('user_show', {id: user.id}) }}" class="rounded-md bg-blue-500 hover:bg-blue-700 px-3 py-1 font-medium text-white">Ver</a>
                 <a href="{{ path('user_edit', {id: user.id}) }}" class="rounded-md bg-yellow-500 hover:bg-yellow-700 px-3 py-1 font-medium text-white">Editar</a>

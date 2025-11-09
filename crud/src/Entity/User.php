@@ -8,6 +8,7 @@
 
     #[ORM\Entity(repositoryClass: \App\Repository\UserRepository::class)]
     #[ORM\Table(name: 'users')]
+    #[ORM\HasLifecycleCallbacks]
     class User {
 
         #[ORM\Id]
@@ -29,6 +30,12 @@
 
         #[ORM\Column(type: 'boolean')]
         private ?bool $isActive = null;
+
+        #[ORM\Column(type: 'datetime')]
+        private ?\DateTimeInterface $createdAt = null;
+
+        #[ORM\Column(type: 'datetime', nullable: true)]
+        private ?\DateTimeInterface $modifiedAt = null;
 
         public function getId(): ?int {
 
@@ -99,6 +106,45 @@
             $this->isActive = $isActive;
             return $this;
 
+        }
+
+        public function getCreatedAt(): ?\DateTimeInterface {
+
+            return $this->createdAt;
+
+        }
+
+        public function setCreatedAt(\DateTimeInterface $createdAt): self {
+
+            $this->createdAt = $createdAt;
+            return $this;
+
+        }
+
+        public function getModifiedAt(): ?\DateTimeInterface {
+
+            return $this->modifiedAt;
+
+        }
+
+        public function setModifiedAt(?\DateTimeInterface $modifiedAt): self {
+
+            $this->modifiedAt = $modifiedAt;
+            return $this;
+
+        }
+
+        #[ORM\PrePersist]
+        public function setCreatedAtValue(): void
+        {
+            $this->createdAt = new \DateTimeImmutable();
+            $this->modifiedAt = new \DateTimeImmutable();
+        }
+
+        #[ORM\PreUpdate]
+        public function setModifiedAtValue(): void
+        {
+            $this->modifiedAt = new \DateTimeImmutable();
         }
 
     }

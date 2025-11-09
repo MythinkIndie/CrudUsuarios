@@ -6,6 +6,7 @@
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\Form\Extension\Core\Type\TextType;
     use Symfony\Component\Form\Extension\Core\Type\EmailType;
+    use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
     use Symfony\Component\Form\Extension\Core\Type\SubmitType;
     use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
     use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +18,14 @@
             $builder->add("name", TextType::class)
                 ->add("email", EmailType::class)
                 ->add("phone", TextType::class)
-                ->add("type", TextType::class)
+                ->add('type', ChoiceType::class, [
+                    'choices' => [
+                        'Hotel' => 'Hotel',
+                        'Crucero' => 'Crucero',
+                        'Estación de esquí' => 'Estación de esquí',
+                        'Parque temático' => 'Parque temático',
+                    ]
+                ])
                 ->add("isActive", CheckboxType::class, ["label" => "¿Está activo?", "required" => false])
                 ->add("save", SubmitType::class, ["label" => "Guardar"]);
 

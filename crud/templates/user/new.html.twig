@@ -38,6 +38,7 @@
             <a href="{{ path('user_index') }}" class="rounded-md bg-gray-400 hover:bg-gray-600 px-5 py-2 font-medium text-white">Volver</a>
             <button class="rounded-md bg-blue-600 hover:bg-blue-800 px-5 py-2 font-medium text-white">Guardar</button>
         </div>
+    {{ form_widget(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 </main>
 {% endblock %}
